@@ -14,6 +14,8 @@
         <Label Content="至" HorizontalAlignment="Left" Height="25" Margin="247,129,0,0" VerticalAlignment="Top" Width="73"/>
         <DatePicker HorizontalAlignment="Left" Height="34" Margin="284,129,0,0" VerticalAlignment="Top" Width="112"/>
         <DataGrid HorizontalAlignment="Left" Height="162" Margin="50,253,0,0" VerticalAlignment="Top" Width="454"/>
+        <Button Content="Button" HorizontalAlignment="Left" Height="96" Margin="466,129,0,0" VerticalAlignment="Top" Width="87" Click="Button_Click_1"/>
+        <TextBlock x:Name="Log_Textblock" HorizontalAlignment="Left" Height="111" Margin="50,448,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Width="528"/>
 
     </Grid>
 </Window>

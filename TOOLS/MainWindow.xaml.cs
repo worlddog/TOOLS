@@ -16,6 +16,8 @@ using System.Collections;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using MySql.Data;
+using MySql.Data.MySqlClient;
 
 namespace TOOLS
 {
@@ -80,17 +82,20 @@ namespace TOOLS
             databaseInfos.Add(new DatabaseInfo("凤山", "222.222.222。222"));
             DataBaseChoose.ItemsSource = databaseInfos;
             DataBaseChoose.DisplayMemberPath = "Name";
-            
+
         }
         public string DatabaseIp;
 
         private void DataBaseChoose_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             this.Title = DataBaseChoose.SelectedValue.ToString();
-           DatabaseIp= DataBaseChoose.SelectedValue.ToString();
+            DatabaseIp = DataBaseChoose.SelectedValue.ToString();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+
+
+        //检查下拉框选择
+        private void Check_DataBaseChoose()
         {
             if (DataBaseChoose.SelectedIndex == -1)
             {
@@ -100,6 +105,78 @@ namespace TOOLS
             {
                 MessageBox.Show(DatabaseIp);
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Check_DataBaseChoose();
+        }
+
+        public String Strconn;
+        private void Select_all(String strConnection)
+        {
+            MySql.Data.MySqlClient.MySqlConnection conn;
+            MySql.Data.MySqlClient.MySqlCommand cmd;
+
+            conn = new MySql.Data.MySqlClient.MySqlConnection();
+            cmd = new MySql.Data.MySqlClient.MySqlCommand();
+
+            conn.ConnectionString = strConnection;
+
+            try
+            {
+                conn.Open();
+                cmd.Connection = conn;
+
+                cmd.CommandText = "SELECT * FROM `123`;";
+                cmd.Prepare();
+
+               Log_Textblock.Text= cmd.ExecuteNonQuery().ToString();
+
+
+
+            }
+            catch (MySql.Data.MySqlClient.MySqlException ex)
+            {
+                MessageBox.Show("Error " + ex.Number + " has occurred: " + ex.Message,
+                    "Error");
+            }
+
+
+
+        }
+
+
+
+        //数据库连接
+        private void Connect_Database()
+        {
+            MySql.Data.MySqlClient.MySqlConnection conn;
+            string myConnectionString;
+
+            myConnectionString = "server=127.0.0.1;uid=root;" +
+                "pwd=12345;database=test";
+
+            try
+            {
+                conn = new MySql.Data.MySqlClient.MySqlConnection();
+                conn.ConnectionString = myConnectionString;
+                conn.Open();
+             
+            }
+            catch (MySql.Data.MySqlClient.MySqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+           Strconn= "server=127.0.0.1;uid=root;" +
+                "pwd=12345;database=test";
+            Connect_Database();
+            Select_all(Strconn);
         }
     }
 }
