@@ -1,0 +1,19 @@
+﻿<Window x:Class="TOOLS.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TOOLS"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="650" Width="1007" Loaded="Window_Loaded">
+    <Grid>
+        <Button Content="查询所有数据" HorizontalAlignment="Left" Height="53" Margin="95,172,0,0" VerticalAlignment="Top" Width="136" Click="Button_Click" />
+        <ComboBox x:Name="DataBaseChoose" HorizontalAlignment="Left" Height="25" Margin="65,60,0,0" VerticalAlignment="Top" Width="198" SelectionChanged="DataBaseChoose_SelectionChanged"  />
+        <DatePicker HorizontalAlignment="Left" Height="25" Margin="84,129,0,0" VerticalAlignment="Top" Width="158"/>
+        <Label Content="从" HorizontalAlignment="Left" Height="34" Margin="32,129,0,0" VerticalAlignment="Top" Width="35"/>
+        <Label Content="至" HorizontalAlignment="Left" Height="25" Margin="247,129,0,0" VerticalAlignment="Top" Width="73"/>
+        <DatePicker HorizontalAlignment="Left" Height="34" Margin="284,129,0,0" VerticalAlignment="Top" Width="112"/>
+        <DataGrid HorizontalAlignment="Left" Height="162" Margin="50,253,0,0" VerticalAlignment="Top" Width="454"/>
+
+    </Grid>
+</Window>
