@@ -7,15 +7,16 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="650" Width="1007" Loaded="Window_Loaded">
     <Grid>
-        <Button Content="查询所有数据" HorizontalAlignment="Left" Height="53" Margin="95,172,0,0" VerticalAlignment="Top" Width="136" Click="Button_Click" />
+        <Button Content="查询所有数据" HorizontalAlignment="Left" Height="53" Margin="50,317,0,0" VerticalAlignment="Top" Width="136" Click="Button_Click" />
         <ComboBox x:Name="DataBaseChoose" HorizontalAlignment="Left" Height="25" Margin="65,60,0,0" VerticalAlignment="Top" Width="198" SelectionChanged="DataBaseChoose_SelectionChanged"  />
-        <DatePicker HorizontalAlignment="Left" Height="25" Margin="84,129,0,0" VerticalAlignment="Top" Width="158"/>
-        <Label Content="从" HorizontalAlignment="Left" Height="34" Margin="32,129,0,0" VerticalAlignment="Top" Width="35"/>
-        <Label Content="至" HorizontalAlignment="Left" Height="25" Margin="247,129,0,0" VerticalAlignment="Top" Width="73"/>
-        <DatePicker HorizontalAlignment="Left" Height="34" Margin="284,129,0,0" VerticalAlignment="Top" Width="112"/>
-        <DataGrid HorizontalAlignment="Left" Height="162" Margin="50,253,0,0" VerticalAlignment="Top" Width="454"/>
-        <Button Content="Button" HorizontalAlignment="Left" Height="96" Margin="466,129,0,0" VerticalAlignment="Top" Width="87" Click="Button_Click_1"/>
-        <TextBlock x:Name="Log_Textblock" HorizontalAlignment="Left" Height="111" Margin="50,448,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Width="528"/>
+        <DatePicker HorizontalAlignment="Left" Height="25" Margin="194,217,0,0" VerticalAlignment="Top" Width="158"/>
+        <Label Content="从" HorizontalAlignment="Left" Height="34" Margin="146,218,0,0" VerticalAlignment="Top" Width="36"/>
+        <Label Content="至" HorizontalAlignment="Left" Height="24" Margin="357,218,0,0" VerticalAlignment="Top" Width="26"/>
+        <DatePicker HorizontalAlignment="Left" Height="34" Margin="392,213,0,0" VerticalAlignment="Top" Width="112" RenderTransformOrigin="1.33,-2.154"/>
+        <DataGrid x:Name="Result_DataGrid" HorizontalAlignment="Left" Height="162" Margin="50,388,0,0" VerticalAlignment="Top" Width="454" ItemsSource="{Binding Path=dt}" AutoGenerateColumns="True" />
+        <Button Content="Button" HorizontalAlignment="Left" Height="96" Margin="613,281,0,0" VerticalAlignment="Top" Width="87" Click="Button_Click_1" />
+        <TextBlock x:Name="Log_Textblock" HorizontalAlignment="Left" Height="48" Margin="50,555,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Width="528"/>
+        <Button x:Name="Get_1k_Button" Content="查看一千条" HorizontalAlignment="Left" Height="60" Margin="263,317,0,0" VerticalAlignment="Top" Width="156" Click="Get_1k_Button_Click"/>
 
     </Grid>
 </Window>

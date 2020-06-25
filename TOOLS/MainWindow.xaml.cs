@@ -18,6 +18,7 @@ using System.Data;
 using System.Drawing;
 using MySql.Data;
 using MySql.Data.MySqlClient;
+using System.Runtime.InteropServices.ComTypes;
 
 namespace TOOLS
 {
@@ -80,11 +81,12 @@ namespace TOOLS
             databaseInfos.Add(new DatabaseInfo("潭头", "222.222.222。222"));
             databaseInfos.Add(new DatabaseInfo("柳城东", "222.222.222。222"));
             databaseInfos.Add(new DatabaseInfo("凤山", "222.222.222。222"));
+            databaseInfos.Add(new DatabaseInfo("127", "127.0.0.1"));
             DataBaseChoose.ItemsSource = databaseInfos;
             DataBaseChoose.DisplayMemberPath = "Name";
 
         }
-        public string DatabaseIp;
+        string DatabaseIp;
 
         private void DataBaseChoose_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -92,7 +94,12 @@ namespace TOOLS
             DatabaseIp = DataBaseChoose.SelectedValue.ToString();
         }
 
+        
 
+         string Connection = "server=127.0.0.1; uid=root;" +
+                "pwd=12345;database=test";
+        
+        
 
         //检查下拉框选择
         private void Check_DataBaseChoose()
@@ -113,7 +120,7 @@ namespace TOOLS
         }
 
         public String Strconn;
-        private void Select_all(String strConnection)
+        private void Select_all(String Connection)
         {
             MySql.Data.MySqlClient.MySqlConnection conn;
             MySql.Data.MySqlClient.MySqlCommand cmd;
@@ -121,18 +128,24 @@ namespace TOOLS
             conn = new MySql.Data.MySqlClient.MySqlConnection();
             cmd = new MySql.Data.MySqlClient.MySqlCommand();
 
-            conn.ConnectionString = strConnection;
+            conn.ConnectionString = Connection;
 
             try
             {
                 conn.Open();
                 cmd.Connection = conn;
 
-                cmd.CommandText = "SELECT * FROM `123`;";
+                cmd.CommandText = "SELECT * FROM `laneheartbeat`;";
                 cmd.Prepare();
 
-               Log_Textblock.Text= cmd.ExecuteNonQuery().ToString();
+                MySqlDataAdapter sda = new MySqlDataAdapter("SELECT * FROM `laneheartbeat`", conn);
 
+                Log_Textblock.Text = cmd.ExecuteScalar().ToString();
+                DataSet ds = new DataSet();
+                ds.Clear();
+                DataTable dt = new DataTable();
+                sda.Fill(ds, "dt");
+                Result_DataGrid.DataContext = ds;
 
 
             }
@@ -146,6 +159,43 @@ namespace TOOLS
 
         }
 
+
+        private void get_1k_resule(String Connection)
+        {
+            MySql.Data.MySqlClient.MySqlConnection conn;
+            MySql.Data.MySqlClient.MySqlCommand cmd;
+
+            conn = new MySql.Data.MySqlClient.MySqlConnection();
+            cmd = new MySql.Data.MySqlClient.MySqlCommand();
+
+            conn.ConnectionString = Connection;
+
+            try
+            {
+                conn.Open();
+                cmd.Connection = conn;
+
+                cmd.CommandText = "SELECT * FROM `laneheartbeat`;";
+                cmd.Prepare();
+
+                MySqlDataAdapter sda = new MySqlDataAdapter("SELECT * FROM `laneheartbeat` LIMIT 500", conn);
+
+                Log_Textblock.Text = cmd.ExecuteScalar().ToString();
+                DataSet ds = new DataSet();
+                ds.Clear();
+                DataTable dt = new DataTable();
+                sda.Fill(ds, "dt");
+                Result_DataGrid.DataContext = ds;
+            }
+
+            catch (MySql.Data.MySqlClient.MySqlException ex)
+            {
+                MessageBox.Show("Error " + ex.Number + " has occurred: " + ex.Message,
+                    "Error");
+            }
+
+
+        }
 
 
         //数据库连接
@@ -173,10 +223,15 @@ namespace TOOLS
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-           Strconn= "server=127.0.0.1;uid=root;" +
-                "pwd=12345;database=test";
-            Connect_Database();
-            Select_all(Strconn);
+           
+            Select_all(Connection);
         }
+         
+        private void Get_1k_Button_Click(object sender, RoutedEventArgs e)
+        {
+            get_1k_resule(Connection);
+        }
+
+
     }
 }
