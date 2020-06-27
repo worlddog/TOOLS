@@ -19,6 +19,7 @@ using System.Drawing;
 using MySql.Data;
 using MySql.Data.MySqlClient;
 using System.Runtime.InteropServices.ComTypes;
+using System.Runtime.CompilerServices;
 
 namespace TOOLS
 {
@@ -92,13 +93,22 @@ namespace TOOLS
         {
             this.Title = DataBaseChoose.SelectedValue.ToString();
             DatabaseIp = DataBaseChoose.SelectedValue.ToString();
+           
         }
 
-        
+      
 
-         string Connection = "server=127.0.0.1; uid=root;" +
+        string Connection = "server=127.0.0.1; uid=root;" +
                 "pwd=12345;database=test";
-        
+
+        private string Get_connection()
+        {
+            
+            string connstr = "server="+DatabaseIp +"; uid=root;pwd=12345;database=test";
+
+                return connstr;
+
+        }
         
 
         //检查下拉框选择
@@ -224,7 +234,8 @@ namespace TOOLS
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
            
-            Select_all(Connection);
+            Select_all(Get_connection());
+            
         }
          
         private void Get_1k_Button_Click(object sender, RoutedEventArgs e)
