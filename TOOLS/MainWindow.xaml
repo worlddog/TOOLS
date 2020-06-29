@@ -17,6 +17,7 @@
         <Button Content="Button" HorizontalAlignment="Left" Height="96" Margin="613,281,0,0" VerticalAlignment="Top" Width="87" Click="Button_Click_1" />
         <TextBlock x:Name="Log_Textblock" HorizontalAlignment="Left" Height="48" Margin="50,555,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Width="528"/>
         <Button x:Name="Get_1k_Button" Content="查看一千条" HorizontalAlignment="Left" Height="60" Margin="263,317,0,0" VerticalAlignment="Top" Width="156" Click="Get_1k_Button_Click"/>
+        <CheckBox Content="车道编码" HorizontalAlignment="Left" Margin="485,60,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>
